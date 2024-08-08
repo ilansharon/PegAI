@@ -41,6 +41,29 @@ class Board:
         else:
             print("ERROR - false starting move")
 
+    def findValidMovesAtLocation(self, start):
+        allPotentials = []
+        if self.isOnBoard(start) and self.board[start[0]][start[1]]:     # check that start is on board and full
+            for i, rows in enumerate(self.board):
+                for col, _ in enumerate(rows):
+                    end = (i, col)
+                    potentialMove = Move(start, end)
+                    if potentialMove.validateMove(self):
+                        allPotentials.append(potentialMove)
+        elif not self.isOnBoard(start):
+            print("ERROR - tried checking for valid moves at offboard location")
+        else:
+            print("ERROR - tried checking for valid moves at empty location")
+        return allPotentials
+    
+    def findAllValidMoves(self):
+        allValid = []
+        for rowi, row in enumerate(self.board):
+            for coli, col in enumerate(row):
+                if self.board[rowi][coli]: 
+                    start = (rowi, coli)
+                    allValid.extend(self.findValidMovesAtLocation(start))
+        return allValid
 
 
 class Move:
@@ -58,23 +81,17 @@ class Move:
             board.board[self.end[0]][self.end[1]] = True
         else:
             print("ERROR - invalid move")
-
-
-
-        # if valid move:
-            # set start to false
-            # set middle to false
-            # set end to true        
+    
 
     
     #function to check if a move is possible
     def validateMove(self, board):
-        return (self.isWithinRange() and              # valid range
+        return (self.isWithinRange() and                                # valid range
                 board.isOnBoard(self.start) and 
-                board.isOnBoard(self.end) and       # start and end on board
-                board.board[self.start[0]][self.start[1]] and               # start is full
-                board.board[self.middle[0]][self.middle[1]] and not          # middle is full
-                board.board[self.end[0]][self.end[1]]                     # end is empty
+                board.isOnBoard(self.end) and                           # start and end on board
+                board.board[self.start[0]][self.start[1]] and           # start is full
+                board.board[self.middle[0]][self.middle[1]] and not     # middle is full
+                board.board[self.end[0]][self.end[1]]                   # end is empty
         )
 
         
@@ -100,11 +117,12 @@ class Move:
     #assumes valid range
     def getMiddle(self):
         if self.type == "vertical":
-            return (self.end[0] - 1, self.end[1])
+            return (self.start[0] + (self.end[0] - self.start[0]) // 2, self.start[1])
         elif self.type == "horizontal":
-            return (self.end[0], self.end[1] - 1)
+            return (self.start[0], self.start[1] + (self.end[1] - self.start[1]) // 2)
         else:
-            return(self.end[0] - 1, self.end[1] - 1)
+            return (self.start[0] + (self.end[0] - self.start[0]) // 2, self.start[1] + (self.end[1] - self.start[1]) // 2)
+
 
     
 

@@ -19,6 +19,9 @@ print("within range?: ", testMove.isWithinRange())
 print("is valid?: ", testMove.validateMove(testBoard))
 testMove.executeMove(testBoard)
 print(testBoard.board)
+allvalid = testBoard.findAllValidMoves()
+for i in allvalid:
+    print("move: , ", i.start, i.end)
 
 
 
