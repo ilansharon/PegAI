@@ -101,8 +101,6 @@ class Move:
                 board.board[self.end[0]][self.end[1]]                   # end is empty
         )
 
-        
-
     
     def isWithinRange(self):
         distance = (((self.start[0] - self.end[0])**2) + ((self.start[1] - self.end[1])**2))
