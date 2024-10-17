@@ -1,5 +1,6 @@
 from game import Board, Move
 from randomStrategy import playRandomly
+from DFS import playDFS
 
 
 # testBoard = Board(5)
@@ -40,15 +41,24 @@ def testRandomGame(size):
     print("number of pins remaining: ", numFull)
     return numFull
 
-bestScore = 10
-attempts = 0
-while bestScore > 1:
-    thisScore = testRandomGame(7)
-    if thisScore < bestScore:
-        bestScore = thisScore
+# bestScore = 10
+# attempts = 0
+# while bestScore > 1:
+#     thisScore = testRandomGame(7)
+#     if thisScore < bestScore:
+#         bestScore = thisScore
 
-    attempts += 1
-print("number of attempts to best score: ", attempts)
+#     attempts += 1
+# print("number of attempts to best score: ", attempts)
+
+success, numFull, numMoves, winPath= playDFS(7)
+print(success, numFull, numMoves)
+for i in winPath:
+    print(i.start, i.end)
+
+            
+
+
     
 
 

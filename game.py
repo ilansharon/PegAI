@@ -8,6 +8,7 @@ class Board:
     def __init__(self, size):
         self.size = size
         self.board = self.createFull()
+        self.numFull = self.getNumFull()
 
     #creates a full board
     def createFull(self):
@@ -39,7 +40,7 @@ class Board:
         total = 0
         for row in self.board:
             for spot in row:
-                total += spot #watched a youtube video about branchless programming, lol
+                total += spot #just watched a youtube video about branchless programming, lol
         return total
     
     def startingMove(self, location):
@@ -88,6 +89,12 @@ class Move:
             board.board[self.end[0]][self.end[1]] = True
         else:
             print("ERROR - invalid move")
+
+    def undoMove(self, board):
+            # assumes move is valid, should only be called directly after a move occurs
+            board.board[self.start[0]][self.start[1]] = True
+            board.board[self.middle[0]][self.middle[1]] = True
+            board.board[self.end[0]][self.end[1]] = False
     
 
     
