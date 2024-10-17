@@ -19,7 +19,7 @@ Wish me luck! (08/24)
 
 (09/24) So far, I've just coded the functionality of the game, and enabled the computer to play the game with a random strategy. 
 This random strategy in and of itself yields some interesting statistical results, which I intend to model in the future. 
-I also will add a minmax player, and an ai player.
+I also will add a minimax player, and an ai player.
 
 (10/24) In between my way too many classes, I've gotten depth first search running. I learned that Minimax is meant for a two 
 player game and has to account for mutliple players with conflicting interests. Instead, I use depth first search to look through 
